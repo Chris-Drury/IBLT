@@ -12,7 +12,6 @@ IBLT will requires the following modules to run correctly:
 2. googletrans - For text translation
 
 To install these, use the pip command.
-As an example, to install Pillow:
-'''
-python -m pip install Pillow
-'''
+As an example, to install Pillow:\
+
+    python -m pip install Pillow
