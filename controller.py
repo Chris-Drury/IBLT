@@ -1,0 +1,48 @@
+"""
+This file is responsable to as the main controller for IBLT,
+and is responsable for:
+
+1. Enhancing the provided images
+2. Isolating the text to translate
+3. translating the text
+4. stiching the translated text back onto the image
+
+while also saving the images at each step to demonstrate the
+functionality for project demos
+
+dependancies:
+Pillow (PIL)
+googletrans
+
+TO DO:
+1. Isolate the image
+2. create the translator
+3. setup the translator to accept language inputs
+4. stitch the translated text to the enhanced image
+
+MAYBES:
+5. the final product might look better if we downscale the final
+    image by the same factor used to enhance the image at the beginning
+"""
+
+import image_enhancer
+import image_fryer
+import text_ioslator
+import translator
+
+
+image_path = "images/DRAKE.png"
+
+# Enhance the image and show it
+enhanced_image, enhanced_image_path = image_enhancer.enhance_image(
+    image_path, 5.0)
+enhanced_image.show()
+
+# isolate the text from the image
+raw_text = text_ioslator(enhanced_image)
+
+# translate the text
+translated_text = translator.text_translator(raw_text)
+
+# stitch the text back onto the image
+# TO DO

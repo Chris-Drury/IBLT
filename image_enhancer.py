@@ -1,16 +1,18 @@
 """
-This file contains the function required to enhance the image before 
+This file contains the function required to enhance the image before
 retrieving the text from the provided image
 
-dependancy: 
-Pillow (PIL) from pypi
+dependancies:
+Pillow (PIL)
 """
+
 from PIL import Image, ImageEnhance
+from image_fryer import image_fryer
 
 
 def enhance_image(path: str, scaling: float):
+    # retireve the image
     im = Image.open(path)
-    # im.show()
 
     # create the enhancer and apply the enhancement
     enhancer = ImageEnhance.Sharpness(im)
@@ -18,7 +20,8 @@ def enhance_image(path: str, scaling: float):
 
     # determine the path to save the newly enhanced image
     path_no_extension, extension = path.split(".", 1)[0], path.split(".", 1)[1]
-    enhanced_image_path = path_no_extension + "_enhanced_by_" + str(scaling) + "." + extension
+    enhanced_image_path = path_no_extension + "_enhanced_by_" + \
+        str(scaling) + "x." + extension
 
     # save the enhanced image with the new path
     enhanced_image.save(enhanced_image_path)
@@ -26,12 +29,8 @@ def enhance_image(path: str, scaling: float):
     return enhanced_image, enhanced_image_path
 
 
-test, enhanced_image_path = enhance_image("images/DRAKE.png", 5.0)
-test.show()
+# test, enhanced_image_path = enhance_image("images/DRAKE.png", 5.0)
+# test.show()
 
-# frier = ImageEnhance.Contrast(enhanced_image)
-# fried_meme = frier.enhance(4.0)
-# fried_meme.show()
-# fried_meme.save("images/DRAKE_fried_by_4x.png")
-
-print("we added the image!")
+# fried_test, fried_image_path = image_fryer(enhanced_image_path, 20.0)
+# fried_test.show()

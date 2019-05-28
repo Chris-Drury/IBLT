@@ -1,15 +1,28 @@
+"""
+This file is responsable for translating
+the isolated text from text_isolator.py.
+
+dependancies:
+googletrans
+"""
+
 from googletrans import Translator
 
-translator = Translator()
 
-translated = translator.translate('你好')
-# print(translated)
-#  -> "Translated(src=zh-CN, dest=en, text=Hello there, 
-#                   pronunciation=None, extra_data="{'translat...")"
-# print(translated.text)
-#  -> "Hello there"
+def text_translator(test: str):
+    # setup the translator?
+    translator = Translator()
 
-translated = translator.translate(translated.text, dest='fr')
-# print(translated)
-#  -> "Translated(src=en, dest=fr, text=Bonjour, 
-#                   pronunciation=Bonjour, extra_data="{'translat...")"
+    translated = translator.translate('你好')
+    # print(translated)
+    #  -> "Translated(src=zh-CN, dest=en, text=Hello there, 
+    #                   pronunciation=None, extra_data="{'translat...")"
+    # print(translated.text)
+    #  -> "Hello there"
+
+    translated = translator.translate(translated.text, dest='fr')
+    # print(translated)
+    #  -> "Translated(src=en, dest=fr, text=Bonjour, 
+    #                   pronunciation=Bonjour, extra_data="{'translat...")"
+
+    return translated_text
