@@ -36,13 +36,15 @@ image_path = "images/DRAKE.png"
 # Enhance the image and show it
 enhanced_image, enhanced_image_path = image_enhancer.enhance_image(
     image_path, 5.0)
-enhanced_image.show()
+enhanced_image.show()  # display the enhanced image
 
 # isolate the text from the image
-raw_text = text_ioslator(enhanced_image)
+raw_text = text_ioslator.ioslate_text(enhanced_image_path)
 
 # translate the text
 translated_text = translator.text_translator(raw_text)
 
 # stitch the text back onto the image
 # TO DO
+
+print(translated_text)

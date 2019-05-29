@@ -11,6 +11,13 @@ from image_fryer import image_fryer
 
 
 def enhance_image(path: str, scaling: float):
+    """Enhance the determined image
+
+    Keyword arguments:
+    path    -- the relative location of the image to enhance
+    scaling -- the scaling factor to use on the image when enhancing
+    """
+
     # retireve the image
     im = Image.open(path)
 

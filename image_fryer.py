@@ -11,6 +11,13 @@ from PIL import Image, ImageEnhance
 
 
 def image_fryer(path: str, scaling: float):
+    """'fry' the determined image
+
+    Keyword arguments:
+    path    -- the relative location of the image to fry
+    scaling -- the scaling factor to use on the image when frying
+    """
+
     # retrieve the image
     krabby_patty = Image.open(path)
 

@@ -10,5 +10,11 @@ Pillow (PIL)
 from PIL import Image
 
 
-def ioslate_text(image: Image):
+def ioslate_text(image_path: str):
+    """ioslate any text within the image
+
+    Keyword arguments:
+    image_path -- the relative path of the image under inspection
+    """
+
     return "Hello World"
