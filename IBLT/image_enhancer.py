@@ -7,7 +7,6 @@ Pillow (PIL)
 """
 
 from PIL import Image, ImageEnhance
-from image_fryer import image_fryer
 
 
 def enhance_image(path: str, scaling: float):

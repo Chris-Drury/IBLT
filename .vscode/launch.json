@@ -5,6 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: controller.py",
+            "type": "python",
+            "request": "launch",
+            "module": "controller.py"
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
