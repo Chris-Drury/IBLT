@@ -9,26 +9,27 @@ googletrans
 from googletrans import Translator
 
 
-def text_translator(text: str):
-    """translate the passed text
+def text_translator(text: str, lang: str):
+    """translate the passed text into the passed language
 
     Keyword arguments:
     text -- the text to be translated
+    lang -- the language to be translated to -- in langcode form
     """
 
-    # setup the translator?
+    # setup the translator
     translator = Translator()
 
-    translated = translator.translate('你好')
+    # translate the text to the selected language
+    translated = translator.translate(text, dest=lang)
+
     # print(translated)
     #  -> "Translated(src=zh-CN, dest=en, text=Hello there, 
     #                   pronunciation=None, extra_data="{'translat...")"
     # print(translated.text)
     #  -> "Hello there"
-
-    translated = translator.translate(translated.text, dest='fr')
     # print(translated)
     #  -> "Translated(src=en, dest=fr, text=Bonjour, 
     #                   pronunciation=Bonjour, extra_data="{'translat...")"
 
-    return "translated text"
+    return translated.text

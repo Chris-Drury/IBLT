@@ -27,7 +27,8 @@ MAYBES:
     (user input was stated in the proposal), and if we want a simple GUI
 """
 
-from IBLT import image_enhancer, image_fryer, text_ioslator, translator
+from IBLT import image_enhancer, image_fryer, text_ioslator, \
+    translator, languages
 
 image_path = 'images/DRAKE.png'
 
@@ -38,8 +39,15 @@ enhanced_image, enhanced_image_path = image_enhancer.enhance_image(
 # isolate the text from the image
 raw_text = text_ioslator.ioslate_text(enhanced_image_path)
 
+# get language input from user
+raw_lang = input("Enter language: ")
+# this should be done via GUI later
+
+# get langcode from requested language
+langcode = languages.get_lang_code(raw_lang)
+
 # translate the text
-translated_text = translator.text_translator(raw_text)
+translated_text = translator.text_translator(raw_text, langcode)
 
 # stitch the text back onto the image
 # TO DO
