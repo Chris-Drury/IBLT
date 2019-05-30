@@ -14,4 +14,3 @@ def get_lang_code(lang: str):
     Langcodes = dict(map(reversed, LANGUAGES.items()))
     # return the code of the requested language
     return(Langcodes[lang])
-

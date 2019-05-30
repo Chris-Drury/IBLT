@@ -23,7 +23,7 @@ TO DO:
 MAYBES:
 5. the final product might look better if we downscale the final
     image by the same factor used to enhance the image at the beginning
-6. we'll need to figure out how to determine the language 
+6. we'll need to figure out how to determine the language
     (user input was stated in the proposal), and if we want a simple GUI
 """
 
@@ -40,7 +40,7 @@ enhanced_image, enhanced_image_path = image_enhancer.enhance_image(
 raw_text = text_ioslator.ioslate_text(enhanced_image_path)
 
 # get language input from user
-raw_lang = input("Enter language: ")
+raw_lang = input("Enter language: ").lower()
 # this should be done via GUI later
 
 # get langcode from requested language
