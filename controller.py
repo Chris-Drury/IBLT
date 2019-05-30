@@ -39,12 +39,9 @@ enhanced_image, enhanced_image_path = image_enhancer.enhance_image(
 # isolate the text from the image
 raw_text = text_ioslator.ioslate_text(enhanced_image_path)
 
-# get language input from user
-raw_lang = input("Enter language: ").lower()
+# get language input from user and retrieve the corresponding langcode
+langcode = languages.get_lang_code(input("Enter language: ").lower())
 # this should be done via GUI later
-
-# get langcode from requested language
-langcode = languages.get_lang_code(raw_lang)
 
 # translate the text
 translated_text = translator.text_translator(raw_text, langcode)

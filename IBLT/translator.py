@@ -9,7 +9,7 @@ googletrans
 from googletrans import Translator
 
 
-def text_translator(text: str, lang: str):
+def text_translator(text: list, lang: str):
     """translate the passed text into the passed language
 
     Keyword arguments:
@@ -19,9 +19,11 @@ def text_translator(text: str, lang: str):
 
     # setup the translator
     translator = Translator()
+    translated = []
 
-    # translate the text to the selected language
-    translated = translator.translate(text, dest=lang)
+    for txt in text:
+        # translate the text to the selected language
+        translated.append(translator.translate(txt, dest=lang).text)
 
     # print(translated)
     #  -> "Translated(src=zh-CN, dest=en, text=Hello there, 
@@ -32,4 +34,4 @@ def text_translator(text: str, lang: str):
     #  -> "Translated(src=en, dest=fr, text=Bonjour, 
     #                   pronunciation=Bonjour, extra_data="{'translat...")"
 
-    return translated.text
+    return translated

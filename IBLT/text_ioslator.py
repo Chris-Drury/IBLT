@@ -28,9 +28,9 @@ def ioslate_text(image_path: str):
 
     # retrieve the text and removing any formatting strings
     image_string = pytesseract.image_to_string(image)
-    image_string = image_string.replace("\n", " ")
+    image_text = list(filter(None, image_string.split("\n")))
 
-    return image_string
+    return image_text
 
 
 def greyscaler(image_path: str):
