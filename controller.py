@@ -27,7 +27,7 @@ MAYBES:
 from IBLT import image_enhancer, image_fryer, text_ioslator, \
     translator, languages
 
-image_path = 'images/DRAKE.png'
+image_path = 'images/Swedish.PNG'
 
 # Enhance the image and show it
 enhanced_image, enhanced_image_path = image_enhancer.enhance_image(

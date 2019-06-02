@@ -29,6 +29,7 @@ def ioslate_text(image_path: str):
     # retrieve the text while removing any formatting tags
     image_string = pytesseract.image_to_string(image)
     image_text = list(filter(None, image_string.split("\n")))
+    image_words = image_string.split()
 
     # open the coloured image to be used during box drawing
     coloured_image = Image.open(image_path)
@@ -39,10 +40,10 @@ def ioslate_text(image_path: str):
     for i in range(n_boxes):
 
         # determine if the detected text is actual text and not whitespace:
-        if data['text'][i].strip():
+        if data['text'][i].strip() in image_words:
             (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
 
-            # draw the rectangle on the detected image
+            # draw the text rectangle on the detected image
             drawer = ImageDraw.Draw(coloured_image)
             drawer.rectangle([(x, y), (x+w, y+h)], None, 'green', width=4)
 

@@ -27,7 +27,7 @@ def enhance_image(path: str, scaling: float):
     # determine the path to save the newly enhanced image
     path_no_extension, extension = path.split(".", 1)[0], path.split(".", 1)[1]
     enhanced_image_path = path_no_extension + "_enhanced_by_" + \
-        str(scaling) + "x." + extension
+        str(int(scaling)) + "x." + extension
 
     # save the enhanced image with the new path
     enhanced_image.save(enhanced_image_path)
