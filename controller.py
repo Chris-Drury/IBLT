@@ -1,5 +1,5 @@
 """
-This file is responsable to as the main controller for IBLT,
+This file is responsable to be the main controller for IBLT,
 and is responsable for:
 
 1. Enhancing the provided images
@@ -15,9 +15,6 @@ Pillow (PIL)
 googletrans
 
 TO DO:
-1. Isolate the image
-2. create the translator
-3. setup the translator to accept language inputs
 4. stitch the translated text to the enhanced image
 
 MAYBES:
@@ -41,7 +38,7 @@ raw_text = text_ioslator.ioslate_text(enhanced_image_path)
 
 # get language input from user and retrieve the corresponding langcode
 langcode = languages.get_lang_code(input("Enter language: ").lower())
-# this should be done via GUI later
+# TO DO: this should be done via GUI later
 
 # translate the text
 translated_text = translator.text_translator(raw_text, langcode)

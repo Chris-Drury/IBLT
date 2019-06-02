@@ -7,7 +7,7 @@ Pillow (PIL)
 pytesseract (OCR)
 """
 
-from PIL import Image
+from PIL import Image, ImageDraw
 from IBLT import image_enhancer
 import pytesseract
 
@@ -26,9 +26,34 @@ def ioslate_text(image_path: str):
     # Grey Scale the image located at image_path
     image, path = greyscaler(image_path)
 
-    # retrieve the text and removing any formatting strings
+    # retrieve the text while removing any formatting tags
     image_string = pytesseract.image_to_string(image)
     image_text = list(filter(None, image_string.split("\n")))
+
+    # open the coloured image to be used during box drawing
+    coloured_image = Image.open(image_path)
+
+    # determine the location(s) of the detected text
+    data = pytesseract.image_to_data(image, output_type=pytesseract.Output.DICT) 
+    n_boxes = len(data['level'])
+    for i in range(n_boxes):
+
+        # determine if the detected text is actual text and not whitespace:
+        if data['text'][i].strip():
+            (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
+
+            # draw the rectangle on the detected image
+            drawer = ImageDraw.Draw(coloured_image)
+            drawer.rectangle([(x, y), (x+w, y+h)], None, 'green', width=4)
+
+    coloured_image.show()  # show the product
+
+    # determine the path to save the newly edited colour image
+    path_no_extension = image_path.split(".", 1)[0]
+    extension = image_path.split(".", 1)[1]
+    coloured_image_path = path_no_extension + "_textboxes." + extension
+
+    coloured_image.save(coloured_image_path)
 
     return image_text
 
