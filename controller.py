@@ -35,6 +35,7 @@ enhanced_image, enhanced_image_path = image_enhancer.enhance_image(
 
 # isolate the text from the image
 raw_text = text_ioslator.ioslate_text(enhanced_image_path)
+print(raw_text)
 
 # get language input from user and retrieve the corresponding langcode
 langcode = languages.get_lang_code(input("Enter language: ").lower())

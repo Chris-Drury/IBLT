@@ -44,8 +44,9 @@ def ioslate_text(image_path: str):
             (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
 
             # draw the text rectangle on the detected image
-            drawer = ImageDraw.Draw(coloured_image)
-            drawer.rectangle([(x, y), (x+w, y+h)], None, 'green', width=4)
+            drawer = ImageDraw.Draw(coloured_image, 'RGBA')
+            drawer.rectangle([(x, y), (x+w, y+h)], None, 'green', width=1)
+            # RGB for yellow = (238, 250, 106, 255)
 
     coloured_image.show()  # show the product
 
