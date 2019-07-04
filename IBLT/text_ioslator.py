@@ -35,13 +35,18 @@ def ioslate_text(image_path: str):
     coloured_image = Image.open(image_path)
 
     # determine the location(s) of the detected text
-    data = pytesseract.image_to_data(image, output_type=pytesseract.Output.DICT) 
+    data = pytesseract.image_to_data(
+        image, output_type=pytesseract.Output.DICT) 
     n_boxes = len(data['level'])
     for i in range(n_boxes):
 
         # determine if the detected text is actual text and not whitespace:
         if data['text'][i].strip() in image_words:
-            (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
+            (x, y, w, h) = (
+                data['left'][i], 
+                data['top'][i], 
+                data['width'][i], 
+                data['height'][i])
 
             # draw the text rectangle on the detected image
             drawer = ImageDraw.Draw(coloured_image, 'RGBA')
