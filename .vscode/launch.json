@@ -8,7 +8,8 @@
             "name": "Python: controller.py",
             "type": "python",
             "request": "launch",
-            "module": "controller.py"
+            "module": "controller.py",
+            "console": "integratedTerminal"
         },
         {
             "name": "Python: Current File",
