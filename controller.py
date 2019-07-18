@@ -24,27 +24,30 @@ MAYBES:
     (user input was stated in the proposal), and if we want a simple GUI
 """
 
-from IBLT import image_enhancer, image_fryer, text_ioslator, \
+from IBLT import image_enhancer, image_fryer, text_isolator, \
     translator, languages
 
-image_path = 'images/Swedish.PNG'
+image_path = 'images/Swedish.png'
 
 # Enhance the image and show it
 enhanced_image, enhanced_image_path = image_enhancer.enhance_image(
     image_path, 5.0)
 
 # isolate the text from the image
-raw_text = text_ioslator.ioslate_text(enhanced_image_path)
+raw_text = text_isolator.isolate_text(enhanced_image_path)
 print(raw_text)
 
 # get language input from user and retrieve the corresponding langcode
 langcode = languages.get_lang_code(input("Enter language: ").lower())
-# TO DO: this should be done via GUI later
+# TODO: this could be done via GUI later
 
 # translate the text
 translated_text = translator.text_translator(raw_text, langcode)
 
-# stitch the text back onto the image
-# TO DO
-
 print(translated_text)
+
+# stitch the text back onto the image
+image = text_isolator.text_stitcher(translated_text, image_path)
+# NOT DONE
+
+
