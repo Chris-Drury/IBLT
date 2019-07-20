@@ -59,8 +59,10 @@ def isolate_text(image_path: str):
 
             # draw the text rectangle on the detected image
             drawer = ImageDraw.Draw(coloured_image, 'RGBA')
-            drawer.rectangle([(x, y), (x+w, y+h)], None, 'green') #, width=1)
+            drawer.rectangle([(x, y), (x+w, y+h)], None, 'green')
             # RGB for yellow = (238, 250, 106, 255)
+        else:
+            data['text'][i] = "TOMBSTONE"  # placeholder for bad text
 
     # determine the path to save the newly edited colour image
     path_no_extension = image_path.split(".", 1)[0]
@@ -69,7 +71,7 @@ def isolate_text(image_path: str):
 
     coloured_image.save(coloured_image_path)
 
-    return image_text, coloured_image_path
+    return image_text, coloured_image_path, data
 
 
 def greyscaler(image_path: str):
