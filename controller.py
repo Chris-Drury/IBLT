@@ -25,16 +25,15 @@ MAYBES:
 """
 
 from IBLT import image_enhancer, image_fryer, text_isolator, \
-    translator, languages
-
-image_path = 'images/Swedish.png'
+    translator, languages, text_stitcher
+image_path = 'images/polish.png'
 
 # Enhance the image and show it
 enhanced_image, enhanced_image_path = image_enhancer.enhance_image(
-    image_path, 5.0)
+    image_path, 1.0)
 
 # isolate the text from the image
-raw_text = text_isolator.isolate_text(enhanced_image_path)
+raw_text, ioslated_image_path = text_isolator.isolate_text(enhanced_image_path)
 print(raw_text)
 
 # get language input from user and retrieve the corresponding langcode
@@ -47,7 +46,5 @@ translated_text = translator.text_translator(raw_text, langcode)
 print(translated_text)
 
 # stitch the text back onto the image
-image = text_isolator.text_stitcher(translated_text, image_path)
+image = text_stitcher.text_stitcher(translated_text, ioslated_image_path)
 # NOT DONE
-
-

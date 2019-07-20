@@ -7,8 +7,9 @@ Pillow (PIL)
 pytesseract (OCR)
 """
 
-from PIL import Image, ImageDraw, ImageFont
-from IBLT import image_enhancer
+from IBLT import text_stitcher
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, \
+    ImageOps
 import pytesseract
 
 
@@ -31,8 +32,16 @@ def isolate_text(image_path: str):
     image_text = list(filter(None, image_string.split("\n")))
     image_words = image_string.split()
 
-    # open the coloured image to be used during box drawing
-    coloured_image = Image.open(image_path)
+    # if it didn't pick up anything try inverting the image and go again
+    if not image_words:
+        image = ImageOps.invert(Image.open(image_path).convert('RGB'))
+        image_string = pytesseract.image_to_string(image)
+        image_text = list(filter(None, image_string.split("\n")))
+        image_words = image_string.split()
+        coloured_image = ImageOps.invert(Image.open(image_path).convert('RGB'))
+    else:
+        # open the coloured image to be used during box drawing
+        coloured_image = Image.open(image_path)
 
     # determine the location(s) of the detected text
     data = pytesseract.image_to_data(
@@ -50,10 +59,8 @@ def isolate_text(image_path: str):
 
             # draw the text rectangle on the detected image
             drawer = ImageDraw.Draw(coloured_image, 'RGBA')
-            drawer.rectangle([(x, y), (x+w, y+h)], None, 'green', width=1)
+            drawer.rectangle([(x, y), (x+w, y+h)], None, 'green') #, width=1)
             # RGB for yellow = (238, 250, 106, 255)
-
-    coloured_image.show()  # show the product
 
     # determine the path to save the newly edited colour image
     path_no_extension = image_path.split(".", 1)[0]
@@ -62,7 +69,7 @@ def isolate_text(image_path: str):
 
     coloured_image.save(coloured_image_path)
 
-    return image_text
+    return image_text, coloured_image_path
 
 
 def greyscaler(image_path: str):
@@ -76,6 +83,8 @@ def greyscaler(image_path: str):
 
     # convert the image to grayscale for OCR
     grayscaled_image = im.convert('1')
+    grayscaled_image = grayscaled_image.filter(ImageFilter.MedianFilter(size=3))
+    grayscaled_image = grayscaled_image.filter(ImageFilter.MedianFilter(size=3))
     # grayscaled_image.show()  # display the grayscale image
 
     # determine the path to save the newly enhanced image
@@ -87,37 +96,3 @@ def greyscaler(image_path: str):
     grayscaled_image.save(grayscale_image_path)
 
     return grayscaled_image, grayscale_image_path
-
-
-def text_stitcher(text: list, image_path: str):
-    # open the image
-    stitched_image = Image.open(image_path)
-    # create the drawer
-    drawer = ImageDraw.Draw(stitched_image)
-    # find where to put text
-    bbox = stitched_image.getbbox()
-    # get font for the text  TODO
-    # fnt = ImageFont.load_default
-    # shave list string
-    text = str(text)[2:-2]
-    # get length of string in pixels (not actually, changes with font size)
-    length = len(str(text))*17
-    # find x value of where to but text
-    xval = bbox[2] - length
-    # find y value of where to put text
-    # TODO
-    # place translated text onto the image
-    drawer.text([xval, bbox[3]/2+10], str(text), 'black')  # , fnt)
-    # show finished result
-    stitched_image.show()
-    # determine the path to save the stitched image
-    path_no_extension = image_path.split(".", 1)[0]
-    extension = image_path.split(".", 1)[1]
-    stitched_image_path = path_no_extension + "_stiched." + extension
-    # save the stitched image
-    stitched_image.save(stitched_image_path)
-    return
-
-
-
-
