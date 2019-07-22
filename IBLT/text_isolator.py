@@ -36,7 +36,9 @@ def isolate_text(image_path: str):
     if not image_words:
         image = ImageOps.invert(Image.open(image_path).convert('RGB'))
         image_string = pytesseract.image_to_string(image)
-        image_text = list(filter(None, image_string.split("\n")))
+        image_text = list(filter(None,
+                                 image_string.join(
+                                    image_string.split("\n")).split()))
         image_words = image_string.split()
         coloured_image = ImageOps.invert(Image.open(image_path).convert('RGB'))
     else:

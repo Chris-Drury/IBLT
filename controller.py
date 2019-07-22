@@ -23,16 +23,33 @@ TO DO:
 
 from IBLT import image_enhancer, image_fryer, text_isolator, \
     translator, languages, text_stitcher
-image_path = 'images/polish.png'
+from PIL import Image
 
-# Enhance the image and show it
-enhanced_image, enhanced_image_path = image_enhancer.enhance_image(
-    image_path, 1.0)
+import sys
 
-# isolate the text from the image
-raw_text, ioslated_image_path, text_data = \
-    text_isolator.isolate_text(enhanced_image_path)
-print(raw_text)
+image_path = 'images/Swedish.png'
+correct = None
+
+for i in range(5):
+    # Enhance the image and show it
+    enhanced_image, enhanced_image_path = image_enhancer.enhance_image(
+        image_path, float(i))
+
+    # isolate the text from the image
+    raw_text, ioslated_image_path, text_data = \
+        text_isolator.isolate_text(enhanced_image_path)
+    print(raw_text)
+    ans = input("Is this correct? [Y/N]  ")
+    if ans.lower() == "y":
+        correct = True
+        break
+    elif ans.lower() != "n":
+        print("[Y/N]")
+
+if not correct:
+    print("Error: No variants are correct. \n\
+                    Shutting down.")
+    sys.exit(0)
 
 # get language input from user and retrieve the corresponding langcode
 langcode = languages.get_lang_code(input("Enter language: ").lower())
@@ -44,6 +61,6 @@ translated_text = translator.text_translator(raw_text, langcode)
 print(translated_text)
 
 # stitch the text back onto the image
-image = text_stitcher.text_stitcher(translated_text,
-                                    ioslated_image_path, text_data)
-# NOT DONE
+stitched_image_path = text_stitcher.text_stitcher(translated_text,
+                                                  ioslated_image_path,
+                                                  text_data)

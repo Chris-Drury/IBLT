@@ -35,3 +35,4 @@ def text_stitcher(text: list, image_path: str, tesseract_data):
     stitched_image_path = path_no_extension + "_stiched." + extension
     # save the stitched image
     stitched_image.save(stitched_image_path)
+    Image.open(stitched_image_path)
