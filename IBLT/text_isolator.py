@@ -29,8 +29,8 @@ def isolate_text(image_path: str):
 
     # retrieve the text while removing any formatting tags
     image_string = pytesseract.image_to_string(image)
-    image_text = list(filter(None, image_string.split("\n")))
-    image_words = image_string.split()
+    # image_text = list(filter(None, image_string.split("\n")))
+    image_text = image_words = image_string.split()
 
     # if it didn't pick up anything try inverting the image and go again
     if not image_words:

@@ -27,7 +27,7 @@ from PIL import Image
 
 import sys
 
-image_path = 'images/Swedish.png'
+image_path = 'images/Font.jpg'
 correct = None
 
 for i in range(5):

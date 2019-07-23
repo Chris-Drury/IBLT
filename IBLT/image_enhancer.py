@@ -21,7 +21,7 @@ def enhance_image(path: str, scaling: float):
     im = Image.open(path)
 
     # create the enhancer and apply the enhancement
-    enhancer = ImageEnhance.Sharpness(im)
+    enhancer = ImageEnhance.Sharpness(im.convert('RGB'))
     enhanced_image = enhancer.enhance(scaling)
 
     # determine the path to save the newly enhanced image
